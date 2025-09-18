@@ -16,18 +16,24 @@ app.use(express.json({ limit: '2mb' }));
 app.use(morgan('dev'));
 
 async function start() {
-  // Session store (Redis if available, else in-memory)
+  // Session store (Redis if REDIS_URL is set, else in-memory)
   let store;
-  try {
-    const redis = new Redis(process.env.REDIS_URL || 'redis://localhost:6379');
-    await redis.ping();
-    store = new RedisStore(redis);
-    // eslint-disable-next-line no-console
-    console.log('Using Redis session store');
-  } catch (e) {
+  if (process.env.REDIS_URL) {
+    try {
+      const redis = new Redis(process.env.REDIS_URL);
+      await redis.ping();
+      store = new RedisStore(redis);
+      // eslint-disable-next-line no-console
+      console.log('Using Redis session store');
+    } catch (e) {
+      store = new MemoryStore();
+      // eslint-disable-next-line no-console
+      console.warn('Redis unavailable, falling back to in-memory session store');
+    }
+  } else {
     store = new MemoryStore();
     // eslint-disable-next-line no-console
-    console.log('Using in-memory session store (Redis not available)');
+    console.log('REDIS_URL not set, using in-memory session store');
   }
 
   // Health
