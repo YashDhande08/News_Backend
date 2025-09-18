@@ -7,6 +7,8 @@ Overview
 - Retrieves top‑K and generates answers via Gemini
 - Sessions in Redis (preferred) with in‑memory fallback
 
+- **Coverage**: Global/world news, Pakistan, India national; all Indian states and their main cities; strong focus on IT/business and AI news across India and major hubs (Bengaluru, Hyderabad, Pune, Chennai, Gurugram, Noida, Mumbai, Delhi)
+
 Run locally (Windows/PowerShell)
 
 ```
@@ -65,3 +67,21 @@ Notes
 
 - Vectors saved to `server/data/vectors.json`
 - If you prefer external scheduling, disable the interval and call `/api/refresh` via Render Cron
+
+Example questions the chatbot answers well
+
+- Latest IT business headlines in India today
+- Bengaluru AI business headlines today
+- Hyderabad IT industry updates today
+- Punjab top news today
+- Karnataka headlines today
+- Mumbai business headlines today
+- Chandigarh headlines today
+- Pakistan business headlines today
+- World top headlines right now
+- Global markets news today
+- Delhi AI startup news today
+- Pune IT services news today
+- Chennai tech headlines today
+- Gurugram startup funding news today
+- Noida IT park news today
