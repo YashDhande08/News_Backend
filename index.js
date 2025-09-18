@@ -21,6 +21,11 @@ async function start() {
   if (process.env.REDIS_URL) {
     try {
       const redis = new Redis(process.env.REDIS_URL);
+      // Avoid unhandled error spam; fall back will still work if ping fails
+      redis.on('error', (err) => {
+        // eslint-disable-next-line no-console
+        console.warn('Redis error:', err?.message || err);
+      });
       await redis.ping();
       store = new RedisStore(redis);
       // eslint-disable-next-line no-console
