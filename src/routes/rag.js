@@ -53,7 +53,9 @@ export function createRagRouter({ store }) {
 
       return res.json({ answer, context: contextChunks });
     } catch (err) {
-      return res.status(500).json({ error: err.message || 'Generation failed' });
+      // eslint-disable-next-line no-console
+      console.error('POST /api/chat failed:', err);
+      return res.status(500).json({ error: err?.message || 'Generation failed' });
     }
   });
 

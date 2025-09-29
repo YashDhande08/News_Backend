@@ -23,6 +23,7 @@ npm run dev
 
 ```
 GEMINI_API_KEY=YOUR_GEMINI_KEY
+GEMINI_MODEL=gemini-2.5-flash
 PORT=4000
 CHAT_TTL_SECONDS=86400
 # Optional Redis (fallback to in‑memory store if absent)
